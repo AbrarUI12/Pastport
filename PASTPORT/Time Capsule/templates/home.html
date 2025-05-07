@@ -174,14 +174,7 @@
         <p><strong>Likes:</strong> {{ capsule.likes | length }}</p>
 
         {% if 'user' in session %}
-          {% set user_liked = false %}
-          {% for like in capsule.likes %}
-            {% if like.user_id == session['user'] %}
-              {% set user_liked = true %}
-            {% endif %}
-          {% endfor %}
-
-          {% if user_liked %}
+          {% if capsule.id in liked_capsule_ids %}
             <form action="{{ url_for('capsule.unlike_capsule', id=capsule.id) }}" method="POST">
               <button type="submit" class="btn btn-danger">Unlike</button>
             </form>
